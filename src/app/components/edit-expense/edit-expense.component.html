@@ -1,0 +1,29 @@
+<div class="edit-expense-form" *ngIf="expense">
+    <h2>Edit Expense</h2>
+    <form (ngSubmit)="updateExpense()" #expenseForm="ngForm">
+      <label>
+        Description:
+        <input type="text" [(ngModel)]="expense.description" name="description" required />
+      </label>
+      <label>
+        Category:
+        <select [(ngModel)]="expense.category" name="category" required>
+          <option value="Food">Food</option>
+          <option value="Travel">Travel</option>
+          <option value="Bills">Bills</option>
+          <option value="Others">Others</option>
+        </select>
+      </label>
+      <label>
+        Amount:
+        <input type="number" [(ngModel)]="expense.amount" name="amount" required />
+      </label>
+      <label>
+        Date:
+        <input type="date" [(ngModel)]="expense.date" name="date" required />
+      </label>
+      <button type="submit">Update Expense</button>
+      <button type="button" (click)="cancelEdit()">Cancel</button>
+    </form>
+  </div>
+  

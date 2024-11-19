@@ -1,0 +1,92 @@
+<div class="expense-list">
+    <h2>Expense List</h2>
+  
+    <div class="search-container">
+      <input
+        type="text"
+        placeholder="Search expenses..."
+        [(ngModel)]="searchQuery"
+        (input)="filterExpenses()"
+      />
+    </div>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Category</th>
+          <th (click)="sortExpenses('amount')">Amount (Rs.) 🔼</th>
+          <th (click)="sortExpenses('date')">Date 🔼</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let expense of filteredExpenses"
+          [class.editing-row]="editingExpenseId === expense.id"
+        >
+         
+          <td>
+            <input
+              *ngIf="editingExpenseId === expense.id"
+              [(ngModel)]="editableExpense.description"
+              placeholder="Description"
+            />
+            <span *ngIf="editingExpenseId !== expense.id">{{ expense.description }}</span>
+          </td>
+  
+          <td>
+            <select
+              *ngIf="editingExpenseId === expense.id"
+              [(ngModel)]="editableExpense.category"
+            >
+              <option value="Food">Food</option>
+              <option value="Travel">Travel</option>
+              <option value="Bills">Bills</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Others">Others</option>
+              
+            </select>
+            <span *ngIf="editingExpenseId !== expense.id">{{ expense.category }}</span>
+          </td>
+  
+          <td>
+            <input
+              type="number"
+              *ngIf="editingExpenseId === expense.id"
+              [(ngModel)]="editableExpense.amount"
+              placeholder="Amount"
+            />
+            <span *ngIf="editingExpenseId !== expense.id">{{ expense.amount | currency }}</span>
+          </td>
+  
+          <td>
+            <input
+              type="date"
+              *ngIf="editingExpenseId === expense.id"
+              [(ngModel)]="editableExpense.date"
+            />
+            <span *ngIf="editingExpenseId !== expense.id">{{ expense.date }}</span>
+          </td>
+  
+          <td>
+            <button *ngIf="editingExpenseId !== expense.id" (click)="startEditing(expense)">
+              Edit
+            </button>
+            <button *ngIf="editingExpenseId === expense.id" (click)="saveEdit()">Save</button>
+            <button *ngIf="editingExpenseId === expense.id" (click)="cancelEdit()">Cancel</button>
+            <button *ngIf="editingExpenseId !== expense.id" (click)="deleteExpense(expense.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2"><strong>Total</strong></td>
+          <td colspan="3"><strong>{{ calculateTotalExpense() | currency }}</strong></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  

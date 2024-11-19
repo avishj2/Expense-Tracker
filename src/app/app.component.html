@@ -1,0 +1,10 @@
+<nav class="navbar">
+  <div class="logo">Expense Tracker</div>
+  <button class="menu-toggle" (click)="toggleMenu()">☰</button>
+  <ul class="nav-links" [class.active]="isMenuOpen">
+    <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+    <li><a routerLink="/expenses" routerLinkActive="active">Expenses</a></li>
+    <li><a routerLink="/add-expense" routerLinkActive="active">Add Expense</a></li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>

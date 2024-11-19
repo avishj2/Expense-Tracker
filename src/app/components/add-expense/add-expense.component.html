@@ -1,0 +1,30 @@
+<div class="add-expense-form">
+    <h2>Add Expense</h2>
+    <form (ngSubmit)="addExpense()" #expenseForm="ngForm">
+      <label>
+        Description:
+        <input type="text" [(ngModel)]="description" name="description" required />
+      </label>
+      <label>
+        Category:
+        <select [(ngModel)]="category" name="category" required>
+          <option value="Food">Food</option>
+          <option value="Travel">Travel</option>
+          <option value="Bills">Bills</option>
+          <option value="Others">Others</option>
+          <option value="Entertainment">Entertainment</option>
+          
+        </select>
+      </label>
+      <label>
+        Amount:
+        <input type="number" [(ngModel)]="amount" name="amount" required />
+      </label>
+      <label>
+        Date:
+        <input type="date" [(ngModel)]="date" name="date" required />
+      </label>
+      <button type="submit">Add Expense</button>
+    </form>
+  </div>
+  

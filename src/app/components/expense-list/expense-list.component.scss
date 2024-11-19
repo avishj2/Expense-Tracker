@@ -1,0 +1,60 @@
+.expense-list {
+    margin: 20px auto;
+    max-width: 800px;
+    padding-bottom: 100px;
+  }
+  
+  .search-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  table tr.editing-row {
+    background-color: #eaf4ff; 
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 8px;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 8px;
+    cursor: pointer;
+    width: 30%;
+    margin: 10px;
+    text-align: center;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+  
