@@ -70,12 +70,12 @@
           </td>
   
           <td>
-            <button *ngIf="editingExpenseId !== expense.id" (click)="startEditing(expense)">
+            <button class="save-btn" *ngIf="editingExpenseId !== expense.id" (click)="startEditing(expense)">
               Edit
             </button>
-            <button *ngIf="editingExpenseId === expense.id" (click)="saveEdit()">Save</button>
-            <button *ngIf="editingExpenseId === expense.id" (click)="cancelEdit()">Cancel</button>
-            <button *ngIf="editingExpenseId !== expense.id" (click)="deleteExpense(expense.id)">
+            <button class="save-btn" *ngIf="editingExpenseId === expense.id" (click)="saveEdit()">Save</button>
+            <button class="cancel-btn" *ngIf="editingExpenseId === expense.id" (click)="cancelEdit()">Cancel</button>
+            <button class="delete-btn" *ngIf="editingExpenseId !== expense.id" (click)="deleteExpense(expense.id)">
               Delete
             </button>
           </td>

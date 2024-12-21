@@ -1,9 +1,8 @@
 .expense-list {
-    margin: 20px auto;
-    max-width: 800px;
-    padding-bottom: 100px;
-  }
-  
+  margin: 20px auto;
+  max-width: 800px;
+  padding-bottom: 100px;
+
   .search-container input {
     width: 100%;
     padding: 10px;
@@ -11,29 +10,30 @@
     border: 1px solid #ddd;
     border-radius: 4px;
   }
-  
+
   table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+      font-size: 14px; 
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    tr.editing-row {
+      background-color: #eaf4ff;
+    }
   }
-  
-  table th, table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-  }
-  
-  table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  table tr.editing-row {
-    background-color: #eaf4ff; 
-  }
-  
+
   input, select {
     width: 100%;
     padding: 8px;
@@ -42,19 +42,91 @@
     border-radius: 4px;
     font-size: 14px;
   }
-  
+
   button {
-    padding: 5px 10px;
+    padding: 8px 12px;
     border: none;
     border-radius: 4px;
-    font-size: 8px;
+    font-size: 12px;
     cursor: pointer;
-    width: 30%;
-    margin: 10px;
+    margin: 5px;
     text-align: center;
   }
-  
+
+  .save-btn{
+    background-color: green;
+  }
+
+  .cancel-btn{
+    background-color: yellow;
+  }
+
+  .delete-btn{
+    background-color: red;
+  }
+
   button:hover {
     opacity: 0.9;
   }
-  
+
+  @media (max-width: 768px) {
+    margin: 10px;
+
+    table {
+      thead {
+        display: none; 
+      }
+
+      tbody {
+        display: block;
+        width: 100%;
+
+        tr {
+          display: block;
+          margin-bottom: 10px;
+
+          td {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px;
+            font-size: 13px; 
+            border-bottom: 1px solid #ddd;
+          }
+
+          td:before {
+            content: attr(data-label); 
+            font-weight: bold;
+            margin-right: 10px;
+          }
+
+          td:last-child {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+          }
+        }
+      }
+
+      tfoot {
+        display: block;
+        tr {
+          display: flex;
+          justify-content: space-between;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .search-container input {
+      font-size: 12px;
+      padding: 8px;
+    }
+
+    button {
+      padding: 6px 10px;
+      font-size: 10px;
+    }
+  }
+}
