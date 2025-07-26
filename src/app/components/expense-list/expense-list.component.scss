@@ -3,24 +3,101 @@
   max-width: 800px;
   padding-bottom: 100px;
 
-  .search-container input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+  h2 {
+    margin-bottom: 1rem;
+  }
+  .export-button {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+
+  button {
+    padding: 10px 18px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+
+    &:hover {
+      background-color: #45a049;
+      transform: scale(1.02);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
+
+  .filter-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+
+    .search-btn {
+      background-color: green;
+      margin: 10px;
+    }
+    .reset-btn {
+      background-color: rgb(255, 136, 0);
+    }
+    .filter-dates,
+    .filter-search {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-end;
+
+      label {
+        display: flex;
+        flex-direction: column;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      input[type="text"],
+      input[type="date"] {
+        padding: 8px 12px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        height: 38px;
+      }
+
+      button {
+        padding: 8px 16px;
+        font-size: 14px;
+        height: 38px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
   }
 
   table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
 
-    th, td {
+    th,
+    td {
       border: 1px solid #ddd;
       padding: 10px;
       text-align: left;
-      font-size: 14px; 
+      font-size: 14px;
     }
 
     th {
@@ -34,10 +111,10 @@
     }
   }
 
-  input, select {
+  input,
+  select {
     width: 100%;
     padding: 8px;
-    margin: 0;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
@@ -49,32 +126,60 @@
     border-radius: 4px;
     font-size: 12px;
     cursor: pointer;
-    margin: 5px;
+    margin: 5px 0;
     text-align: center;
   }
 
-  .save-btn{
+  .save-btn {
     background-color: green;
+    color: #fff;
+    margin: 10px;
   }
 
-  .cancel-btn{
+  .cancel-btn {
     background-color: rgb(0, 60, 255);
+    color: #fff;
+    margin: 10px;
   }
 
-  .delete-btn{
+  .delete-btn {
     background-color: red;
+    color: #fff;
+    margin: 10px;
   }
 
   button:hover {
     opacity: 0.9;
   }
 
+  // 📱 Mobile
   @media (max-width: 768px) {
     margin: 10px;
 
+    .filter-controls {
+      flex-direction: column;
+      align-items: stretch;
+
+      .filter-dates,
+      .filter-search {
+        flex-direction: column;
+        gap: 0.75rem;
+
+        label,
+        input,
+        button {
+          width: 100%;
+        }
+
+        button {
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+
     table {
       thead {
-        display: none; 
+        display: none;
       }
 
       tbody {
@@ -83,26 +188,36 @@
 
         tr {
           display: block;
-          margin-bottom: 10px;
+          margin-bottom: 15px;
+          background: #fff;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+          padding: 10px;
+          border-radius: 6px;
 
           td {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 8px;
-            font-size: 13px; 
-            border-bottom: 1px solid #ddd;
+            font-size: 13px;
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
           }
 
-          td:before {
-            content: attr(data-label); 
+          td::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 10px;
             font-weight: bold;
-            margin-right: 10px;
+            color: #555;
           }
 
           td:last-child {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 6px;
+            padding-top: 12px;
           }
         }
       }
@@ -115,18 +230,6 @@
           font-size: 14px;
         }
       }
-    }
-  }
-
-  @media (max-width: 480px) {
-    .search-container input {
-      font-size: 12px;
-      padding: 8px;
-    }
-
-    button {
-      padding: 6px 10px;
-      font-size: 10px;
     }
   }
 }
