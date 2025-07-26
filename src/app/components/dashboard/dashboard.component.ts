@@ -19,7 +19,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     const expenses = this.expenseService.getExpenses();
-  console.log('Expenses:', expenses); 
   this.expenses = expenses;
   this.calculateTotalExpenses(expenses);
   this.getRecentExpenses(expenses);
@@ -28,8 +27,11 @@ export class DashboardComponent implements OnInit {
   this.createCategoryChart();
   this.createMonthlyChart();
   this.createLineChart();
+  this.createTopItemsChart();
+  this.createDayOfWeekChart();
   }
 
+  
   calculateTotalExpenses(expenses: Expense[]): void {
     this.totalExpenses = expenses.reduce((sum, expense) => sum + expense.amount, 0);
   }
@@ -218,8 +220,80 @@ export class DashboardComponent implements OnInit {
     return colors[category] || '#6C7A89'; 
   }
   
+  createTopItemsChart(): void {
+  const ctx = document.getElementById('topItemsChart') as HTMLCanvasElement;
+
+  const sortedExpenses = [...this.expenses].sort((a, b) => b.amount - a.amount).slice(0, 5);
+
+  const labels = sortedExpenses.map(item => item.description);
+  const data = sortedExpenses.map(item => item.amount);
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Amount (₹)',
+        data,
+        backgroundColor: '#f39c12'
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        x: {
+          title: { display: true, text: 'Amount (₹)' }
+        },
+        y: {
+          title: { display: true, text: 'Expense Description' }
+        }
+      }
+    }
+  });
+}
+
+createDayOfWeekChart(): void {
+  const ctx = document.getElementById('dayOfWeekChart') as HTMLCanvasElement;
+
+  const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const dayData = Array(7).fill(0);
+
+  this.expenses.forEach(exp => {
+    const dayIndex = new Date(exp.date).getDay();
+    dayData[dayIndex] += exp.amount;
+  });
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: weekDays,
+      datasets: [{
+        label: 'Amount (₹)',
+        data: dayData,
+        backgroundColor: '#5f0a83ff'
+      }]
+    },
+    options: {
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        x: {
+          title: { display: true, text: 'Day of Week' }
+        },
+        y: {
+          beginAtZero: true,
+          title: { display: true, text: 'Total Spend (₹)' }
+        }
+      }
+    }
+  });
   
   
   
   
+}
 }

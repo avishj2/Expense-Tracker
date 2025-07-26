@@ -1,45 +1,54 @@
 <div class="dashboard">
-    <h2>Expense Dashboard</h2>
-  
-    <div class="card total-expenses">
-      <h3>Total Expenses (Rs.)</h3>
-      <p>{{ totalExpenses }}</p>
-    </div>
-    <div class="chart-container">
-        <h3>Monthly Total Expense Trends</h3>
-        <canvas id="lineChart"></canvas>
-    </div>
-       
-    <div class="chart-container">
-      <h3>Category-wise Expense Breakdown</h3>
-      <canvas id="categoryChart"></canvas>
-    </div>
-  
-    <div class="chart-container">
-      <h3>Monthly Expense Trends</h3>
-      <canvas id="monthlyChart"></canvas>
-    </div>
-  
-    <div class="recent-expenses">
-      <h3>Recent Expenses</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Amount (Rs.)</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let expense of recentExpenses">
-            <td>{{ expense.description }}</td>
-            <td>{{ expense.category }}</td>
-            <td>{{ expense.amount }}</td>
-            <td>{{ expense.date }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <h2>Expense Dashboard</h2>
+
+  <div class="card total-expenses">
+    <h3>Total Expenses (Rs.)</h3>
+    <p>{{ totalExpenses }}</p>
   </div>
-  
+  <div class="chart-container">
+    <h3>Monthly Total Expense Trends</h3>
+    <canvas id="lineChart"></canvas>
+  </div>
+
+  <div class="chart-container">
+    <h3>Category-wise Expense Breakdown</h3>
+    <canvas id="categoryChart"></canvas>
+  </div>
+
+  <div class="chart-container">
+    <h3>Monthly Expense Trends</h3>
+    <canvas id="monthlyChart"></canvas>
+  </div>
+
+  <div class="chart-container">
+    <h3>Top 5 Most Expensive Items</h3>
+    <canvas id="topItemsChart"></canvas>
+  </div>
+
+  <div class="chart-container">
+    <h3>Spending by Day of the Week</h3>
+    <canvas id="dayOfWeekChart"></canvas>
+  </div>
+
+  <div class="recent-expenses">
+    <h3>Recent Expenses</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Category</th>
+          <th>Amount (Rs.)</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let expense of recentExpenses">
+          <td>{{ expense.description }}</td>
+          <td>{{ expense.category }}</td>
+          <td>{{ expense.amount }}</td>
+          <td>{{ expense.date }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
