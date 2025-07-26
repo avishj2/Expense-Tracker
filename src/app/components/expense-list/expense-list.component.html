@@ -1,5 +1,7 @@
 <div class="expense-list">
   <h2>Expense List</h2>
+
+  <!-- Filters -->
   <div class="filter-controls">
     <div class="filter-group">
       <label for="fromDate">From:</label>
@@ -26,12 +28,13 @@
       <button (click)="resetFilters()" class="reset-btn">Reset</button>
     </div>
   </div>
+
+  <!-- Excel Export -->
   <div class="export-button">
-  <button (click)="exportToExcel()">Download Excel</button>
-</div>
+    <button (click)="exportToExcel()">⬇ Download Excel</button>
+  </div>
 
-
-
+  <!-- Expense Table -->
   <table>
     <thead>
       <tr>
@@ -44,20 +47,22 @@
     </thead>
     <tbody>
       <tr
-        *ngFor="let expense of filteredExpenses"
+        *ngFor="let expense of paginatedExpenses"
         [class.editing-row]="editingExpenseId === expense.id"
       >
+        <!-- Description -->
         <td>
           <input
             *ngIf="editingExpenseId === expense.id"
             [(ngModel)]="editableExpense.description"
             placeholder="Description"
           />
-          <span *ngIf="editingExpenseId !== expense.id">{{
-            expense.description
-          }}</span>
+          <span *ngIf="editingExpenseId !== expense.id">
+            {{ expense.description }}
+          </span>
         </td>
 
+        <!-- Category -->
         <td>
           <select
             *ngIf="editingExpenseId === expense.id"
@@ -69,11 +74,12 @@
             <option value="Entertainment">Entertainment</option>
             <option value="Others">Others</option>
           </select>
-          <span *ngIf="editingExpenseId !== expense.id">{{
-            expense.category
-          }}</span>
+          <span *ngIf="editingExpenseId !== expense.id">
+            {{ expense.category }}
+          </span>
         </td>
 
+        <!-- Amount -->
         <td>
           <input
             type="number"
@@ -81,22 +87,24 @@
             [(ngModel)]="editableExpense.amount"
             placeholder="Amount"
           />
-          <span *ngIf="editingExpenseId !== expense.id">{{
-            expense.amount | currency
-          }}</span>
+          <span *ngIf="editingExpenseId !== expense.id">
+            {{ expense.amount | currency }}
+          </span>
         </td>
 
+        <!-- Date -->
         <td>
           <input
             type="date"
             *ngIf="editingExpenseId === expense.id"
             [(ngModel)]="editableExpense.date"
           />
-          <span *ngIf="editingExpenseId !== expense.id">{{
-            expense.date
-          }}</span>
+          <span *ngIf="editingExpenseId !== expense.id">
+            {{ expense.date }}
+          </span>
         </td>
 
+        <!-- Actions -->
         <td>
           <button
             class="save-btn"
@@ -129,6 +137,7 @@
         </td>
       </tr>
     </tbody>
+
     <tfoot>
       <tr>
         <td colspan="2"><strong>Total</strong></td>
@@ -138,4 +147,15 @@
       </tr>
     </tfoot>
   </table>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <button
+      *ngFor="let page of [].constructor(totalPages); let i = index"
+      [class.active]="currentPage === i + 1"
+      (click)="goToPage(i + 1)"
+    >
+      {{ i + 1 }}
+    </button>
+  </div>
 </div>

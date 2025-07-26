@@ -18,6 +18,9 @@ export class ExpenseListComponent implements OnInit {
   fromDate: string = '';
   toDate: string = '';
 
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+
   constructor(private expenseService: ExpenseService) {}
 
   ngOnInit(): void {
@@ -118,6 +121,20 @@ export class ExpenseListComponent implements OnInit {
     anchor.href = url;
     anchor.download = 'expenses.xlsx';
     anchor.click();
-    window.URL.revokeObjectURL(url); // Clean up
+    window.URL.revokeObjectURL(url);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.filteredExpenses.length / this.itemsPerPage);
+  }
+
+  get paginatedExpenses(): Expense[] {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    return this.filteredExpenses.slice(start, end);
+  }
+
+  goToPage(page: number): void {
+    this.currentPage = page;
   }
 }
